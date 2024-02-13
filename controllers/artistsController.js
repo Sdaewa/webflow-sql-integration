@@ -1,14 +1,9 @@
-require("dotenv").config();
-
-const webflowService = require("../services/webflowService");
-const WEBFLOW_COLLECTION_ID_ARTISTS = process.env.WEBFLOW_COLLECTION_ID_ARTISTS;
+const dbService = require("../services/dbService");
 
 const addArtist = async (req, res) => {
   try {
-    const newItem = await webflowService.createItem(
-      WEBFLOW_COLLECTION_ID_ARTISTS,
-      req.body
-    );
+    const { name, bio } = req.body;
+    const newItem = await dbService.addArtist(name, bio);
     res.status(201).json(newItem);
   } catch (error) {
     res
@@ -19,7 +14,7 @@ const addArtist = async (req, res) => {
 
 const getArtists = async (req, res) => {
   try {
-    const items = await webflowService.getItems(WEBFLOW_COLLECTION_ID_ARTISTS);
+    const items = await dbService.getAllArtists();
     res.status(200).json(items);
   } catch (error) {
     res
@@ -31,12 +26,9 @@ const getArtists = async (req, res) => {
 const getArtistById = async (req, res) => {
   const { id } = req.params;
   try {
-    const item = await webflowService.getItemById(
-      WEBFLOW_COLLECTION_ID_ARTISTS,
-      id
-    );
-    if (item) {
-      res.status(200).json(item);
+    const item = await dbService.getArtistById(id);
+    if (item.length > 0) {
+      res.status(200).json(item[0]);
     } else {
       res.status(404).json({ message: "Artist not found" });
     }
@@ -49,13 +41,14 @@ const getArtistById = async (req, res) => {
 
 const updateArtist = async (req, res) => {
   const { id } = req.params;
+  const { name, bio } = req.body;
   try {
-    const updatedItem = await webflowService.updateItem(
-      WEBFLOW_COLLECTION_ID_ARTISTS,
-      id,
-      req.body
-    );
-    res.status(200).json(updatedItem);
+    const updatedItem = await dbService.updateArtist(id, name, bio);
+    if (updatedItem.length > 0) {
+      res.status(200).json(updatedItem[0]);
+    } else {
+      res.status(404).json({ message: "Artist not found" });
+    }
   } catch (error) {
     res
       .status(500)
@@ -66,7 +59,7 @@ const updateArtist = async (req, res) => {
 const deleteArtist = async (req, res) => {
   const { id } = req.params;
   try {
-    await webflowService.deleteItem(WEBFLOW_COLLECTION_ID_ARTISTS, id);
+    await dbService.deleteArtist(id);
     res.status(204).send();
   } catch (error) {
     res

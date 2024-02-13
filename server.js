@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const routes = require("./src/routes");
+const routes = require("./routes/routes");
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -19,5 +19,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
-module.exports = app;
