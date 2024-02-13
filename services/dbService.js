@@ -19,17 +19,17 @@ const addArtist = (name, bio) =>
 
 const getAllArtists = () => executeQuery("SELECT * FROM artists", []);
 
-const getArtistById = (id) =>
-  executeQuery("SELECT * FROM artists WHERE id = $1", [id]);
+const getArtistById = (item_id) =>
+  executeQuery("SELECT * FROM artists WHERE item_id = $1", [item_id]);
 
-const updateArtist = (id, name, bio) =>
+const updateArtist = (item_id, name, bio) =>
   executeQuery(
-    "UPDATE artists SET name = $2, bio = $3 WHERE id = $1 RETURNING *",
-    [id, name, bio]
+    "UPDATE artists SET name = $2, bio = $3 WHERE item_id = $1 RETURNING *",
+    [item_id, name, bio]
   );
 
-const deleteArtist = (id) =>
-  executeQuery("DELETE FROM artists WHERE id = $1", [id]);
+const deleteArtist = (item_id) =>
+  executeQuery("DELETE FROM artists WHERE item_id = $1", [item_id]);
 
 // Tracks
 
