@@ -11,7 +11,7 @@ const addArtist = async (req, res) => {
       .json({ message: "Error adding artist", error: error.message });
   }
 };
-
+3;
 const getArtists = async (req, res) => {
   try {
     const items = await dbService.getAllArtists();

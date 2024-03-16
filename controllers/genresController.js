@@ -17,6 +17,7 @@ const getGenres = async (req, res) => {
     const items = await dbService.getAllGenres();
     res.status(200).json(items);
   } catch (error) {
+    console.log(error);
     res
       .status(500)
       .json({ message: "Error fetching genres", error: error.message });

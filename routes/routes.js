@@ -5,9 +5,6 @@ const artistsController = require("../controllers/artistsController");
 const genresController = require("../controllers/genresController");
 const venuesController = require("../controllers/venuesController");
 const eventsController = require("../controllers/eventsController");
-const membersController = require("../controllers/membersController");
-const blogPostsController = require("../controllers/blogPostsController");
-const tracksController = require("../controllers/tracksController");
 
 router.post("/artists", artistsController.addArtist);
 router.get("/artists", artistsController.getArtists);
@@ -32,23 +29,5 @@ router.get("/events", eventsController.getEvents);
 router.get("/events/:id", eventsController.getEventById);
 router.put("/events/:id", eventsController.updateEvent);
 router.delete("/events/:id", eventsController.deleteEvent);
-
-router.post("/members", membersController.addMember);
-router.get("/members", membersController.getMembers);
-router.get("/members/:id", membersController.getMemberById);
-router.put("/members/:id", membersController.updateMember);
-router.delete("/members/:id", membersController.deleteMember);
-
-router.post("/blog-posts", blogPostsController.addBlogPost);
-router.get("/blog-posts", blogPostsController.getBlogPosts);
-router.get("/blog-posts/:id", blogPostsController.getBlogPostById);
-router.put("/blog-posts/:id", blogPostsController.updateBlogPost);
-router.delete("/blog-posts/:id", blogPostsController.deleteBlogPost);
-
-router.post("/tracks", tracksController.addTrack);
-router.get("/tracks", tracksController.getTracks);
-router.get("/tracks/:id", tracksController.getTrackById);
-router.put("/tracks/:id", tracksController.updateTrack);
-router.delete("/tracks/:id", tracksController.deleteTrack);
 
 module.exports = router;

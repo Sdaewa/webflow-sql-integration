@@ -31,28 +31,6 @@ const updateArtist = (item_id, name, bio) =>
 const deleteArtist = (item_id) =>
   executeQuery("DELETE FROM artists WHERE item_id = $1", [item_id]);
 
-// Tracks
-
-const addTrack = (title, artistId) =>
-  executeQuery(
-    "INSERT INTO tracks(title, artist_id) VALUES($1, $2) RETURNING *",
-    [title, artistId]
-  );
-
-const getAllTracks = () => executeQuery("SELECT * FROM tracks", []);
-
-const getTrackById = (id) =>
-  executeQuery("SELECT * FROM tracks WHERE id = $1", [id]);
-
-const updateTrack = (id, title) =>
-  executeQuery("UPDATE tracks SET title = $2 WHERE id = $1 RETURNING *", [
-    id,
-    title,
-  ]);
-
-const deleteTrack = (id) =>
-  executeQuery("DELETE FROM tracks WHERE id = $1", [id]);
-
 // Events
 
 const addEvent = (title, description, date) =>
@@ -74,50 +52,6 @@ const updateEvent = (id, title, description, date) =>
 
 const deleteEvent = (id) =>
   executeQuery("DELETE FROM events WHERE id = $1", [id]);
-
-// Members
-
-const addMember = (name, email) =>
-  executeQuery("INSERT INTO members(name, email) VALUES($1, $2) RETURNING *", [
-    name,
-    email,
-  ]);
-
-const getAllMembers = () => executeQuery("SELECT * FROM members", []);
-
-const getMemberById = (id) =>
-  executeQuery("SELECT * FROM members WHERE id = $1", [id]);
-
-const updateMember = (id, name, email) =>
-  executeQuery(
-    "UPDATE members SET name = $2, email = $3 WHERE id = $1 RETURNING *",
-    [id, name, email]
-  );
-
-const deleteMember = (id) =>
-  executeQuery("DELETE FROM members WHERE id = $1", [id]);
-
-// Blog Posts
-
-const addBlogPost = (title, content, authorId) =>
-  executeQuery(
-    "INSERT INTO blog_posts(title, content, author_id) VALUES($1, $2, $3) RETURNING *",
-    [title, content, authorId]
-  );
-
-const getAllBlogPosts = () => executeQuery("SELECT * FROM blog_posts", []);
-
-const getBlogPostById = (id) =>
-  executeQuery("SELECT * FROM blog_posts WHERE id = $1", [id]);
-
-const updateBlogPost = (id, title, content) =>
-  executeQuery(
-    "UPDATE blog_posts SET title = $2, content = $3 WHERE id = $1 RETURNING *",
-    [id, title, content]
-  );
-
-const deleteBlogPost = (id) =>
-  executeQuery("DELETE FROM blog_posts WHERE id = $1", [id]);
 
 // Venues
 
@@ -169,26 +103,11 @@ module.exports = {
   getArtistById,
   updateArtist,
   deleteArtist,
-  addTrack,
-  getAllTracks,
-  getTrackById,
-  updateTrack,
-  deleteTrack,
   addEvent,
   getAllEvents,
   getEventById,
   updateEvent,
   deleteEvent,
-  addMember,
-  getAllMembers,
-  getMemberById,
-  updateMember,
-  deleteMember,
-  addBlogPost,
-  getAllBlogPosts,
-  getBlogPostById,
-  updateBlogPost,
-  deleteBlogPost,
   addVenue,
   getAllVenues,
   getVenueById,
