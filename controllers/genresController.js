@@ -13,13 +13,10 @@ const addGenre = async (req, res) => {
 };
 
 const getGenres = async (req, res) => {
-console.log('req',req, 'res',res)
   try {
     const items = await dbService.getAllGenres();
-console.log(items)
     res.status(200).json(items);
   } catch (error) {
-    console.log(error);
     res
       .status(500)
       .json({ message: "Error fetching genres", error: error.message });
