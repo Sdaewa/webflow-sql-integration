@@ -1,6 +1,7 @@
 const db = require("../db");
 
 const executeQuery = async (query, params) => {
+  console.log("query", query);
   try {
     const { rows } = await db.query(query, params);
     return rows;
